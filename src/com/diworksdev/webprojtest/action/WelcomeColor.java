@@ -1,5 +1,13 @@
 package com.diworksdev.webprojtest.action;
 
-public class WelcomeColor {
+import com.opensymphony.xwork2.ActionSupport;
+
+public class WelcomeColor extends ActionSupport {
+
+	public String execute() {
+
+		return SUCCESS;
+
+	}
 
 }

@@ -11,7 +11,7 @@
         <title>LOGIN</title>
     </head>
     <body>
-        <s:property value="LoginDTOList.get(0).color_name"/>さん、ようこそ！
+        <s:property value="LoginDTOList.get(0).color_name"/>!!!!!
         <br>
         <table>
             <tbody>
