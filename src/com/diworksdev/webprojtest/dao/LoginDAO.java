@@ -9,6 +9,8 @@ import com.diworksdev.webprojtest.dto.LoginDTO;
 import com.diworksdev.webprojtest.util.DBConnector;
 
 
+//DAOクラスでは、Actionから送られてきた情報を使ってDBへ問い合わせを行うファイル
+//問い合わせて取得した値をDTOクラスに格納するファイル
 public class LoginDAO {
 
 	public String color_name;

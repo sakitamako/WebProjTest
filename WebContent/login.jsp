@@ -7,25 +7,10 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="./css/style.css">
         <title>LOGIN</title>
     </head>
     <body>
-        <s:property value="LoginDTOList.get(0).color_name"/>!!!!!
-        <br>
-        <table>
-            <tbody>
-                <tr>
-                    <th>ColorName</th>
-                    <th>ColorNumber</th>
-                </tr>
-                <s:iterator value="loginDTOList">
-                    <tr>
-                        <td><s:property value="color_name"/></td>
-                        <td><s:property value="color_number"/></td>
-                    </tr>
-                </s:iterator>
-            </tbody>
-        </table>
+    <!-- welcome.jspで入力した名前とパスワードはstrutsファイルの処理結果によってどちらかのファイルに表示される -->
+        <s:property value="color_name"/>さん、ようこそ！！！
     </body>
 </html>
