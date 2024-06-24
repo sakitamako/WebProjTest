@@ -1,8 +1,12 @@
 package com.diworksdev.webprojtest.action;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.diworksdev.webprojtest.dao.LoginDAO;
 import com.diworksdev.webprojtest.dto.LoginDTO;
 import com.opensymphony.xwork2.ActionSupport;
+
 
 public class LoginColor extends ActionSupport {
 
@@ -12,6 +16,12 @@ public class LoginColor extends ActionSupport {
 	private String color_name;
 	private String color_number;
 
+	//List： 複数の要素の順番を保持する。
+	//インデックスを利用して要素にアクセスするため、配列の代わりとして利用することができます。
+	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
+	//このクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
+	private List<LoginDTO> LoginDTOList = new ArrayList<LoginDTO>();
+
 	//メソッド名は「execute」
 	//管理コマンド・メッセージをコマンド・サーバーに送信し、何らかの応答メッセージを待ちます
 	public String execute() {
@@ -19,56 +29,72 @@ public class LoginColor extends ActionSupport {
 		//メソッドの戻り値「ret」 String ret = ERROR; を定義し、初期値としてERRORを代入
 		String ret = ERROR;
 
+		//出力、表示
 		System.out.println(color_name);
 		System.out.println(color_number);
 
-		//②LoginDAOとLoginDTOのインスタンス化
+		//②インスタンス化
+		//DAOと会話するためのコード
 		LoginDAO dao = new LoginDAO();
-		LoginDTO dto = new LoginDTO();
 
-		//JSPから送られてきたnameとpasswordを引数として、
+		//JSPから送られてきたnameとnumberを引数として、
 		//LoginDAOクラスのselectメソッドを呼び出す
 		//その後、DAOで取得した結果をLoginDTOに代入する
-		dto = dao.select(color_name, color_number);
+		//LoginDAOの29行目を呼び出す
+		LoginDTOList = dao.select(color_name, color_number);
 
 		//aとbが共にtrueの時に処理を実行するそうでない場合はエラー
-		if (this.color_name.equals(dto.getColor_name()) && this.color_number.equals(dto.getColor_number())) {
+		//this.とはこのクラスのインスタンスのフィールド(変数)であることを表す。
+		//何かのインスタンス同士が「同じ」かを調べるメソッド=equals、イコールズ？
+		//ユーザーが入力した（color_name）と(color_number)が、DTOからもってきた値（dto.getColor_name()）と(dto.getColor_number())がともにtrueの場合SUCCESS。
+		if (this.color_name.equals(LoginDTOList.get(0).getColor_name()) && this.color_number.equals(LoginDTOList.get(0).getColor_number())){
 
 			ret = SUCCESS;
 
 		} else {
 
 			ret = ERROR;
+
 		}
 
+		//if文の処理結果
 		//retに入った値を呼び出し元であるActionクラスに渡す
 		return ret;
 
 	}
 
 	//フィールド変数に対応したgetterとsetterを定義
-	//Actionクラスから呼び出され、usernameフィールドの値をActionに渡す
+	//get は値を取得、set は登録
 	public String getColor_name() {
 		return color_name;
 
 	}
 
-	//フィールド変数に対応したgetterとsetterを定義
-	//DAOクラスから呼び出され、引数として受け取ったテーブルの値を自身のDTO usernameフィールドに格納
+	//JSPでユーザーが入力したnameとnumberの値がそれぞれ格納される
+	//次画面に値を引き渡すサイトの場合、getter必要です。後々の不具合を防ぐため.
+	//getterとsetterは両方書くようにする
 	public void setColor_name(String color_name) {
 		this.color_name = color_name;
+
 	}
 
-	//フィールド変数に対応したgetterとsetterを定義
-	//Actionクラスから呼び出され、passwordフィールドの値をActionに渡す
 	public String getColor_number() {
 		return color_number;
+
 	}
 
-	//フィールド変数に対応したgetterとsetterを定義
-	//DAOクラスから呼び出され、引数として受け取ったテーブルの値を自身のDTO passwordフィールドに格納
 	public void setColor_number(String color_number) {
 		this.color_number = color_number;
+
+	}
+
+	public List<LoginDTO> getLoginDTOList() {
+		return LoginDTOList;
+
+	}
+
+	public void setLoginDTOList(List<LoginDTO> loginDTOList) {
+		LoginDTOList = loginDTOList;
 
 	}
 

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.diworksdev.webprojtest.dto.LoginDTO;
 import com.diworksdev.webprojtest.util.DBConnector;
@@ -13,13 +15,20 @@ import com.diworksdev.webprojtest.util.DBConnector;
 //問い合わせて取得した値をDTOクラスに格納するファイル
 public class LoginDAO {
 
+	//全てのクラス・変数・変数名
 	public String color_name;
 	public String color_number;
+
+	//List： 複数の要素の順番を保持する。
+	//インデックスを利用して要素にアクセスするため、配列の代わりとして利用することができます。
+	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
+	//全てのクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
+	public List<LoginDTO> loginDTOList = new ArrayList<LoginDTO>();
 
 	//①クラス、メソッドの定義
 	//LoginDTO型を最後に呼び出し元に渡すので、LoginDTO型を戻り値にしたメソッドを作る
 	//Actionクラスの値を引数として受け取る
-	public LoginDTO select(String color_name,String color_number) {
+	public List<LoginDTO> select(String color_name, String color_number) {
 
 		//②DBConnectorのインスタンス化
 		//DBへの接続準備、DBと会話するためのコード、これでログインできる
@@ -29,8 +38,6 @@ public class LoginDAO {
 		//③getConnectionの呼び出し（DBと接続する）
 		Connection con = db.getConnection();
 
-		//LoginDTOのインスタンス化
-		LoginDTO dto = new LoginDTO();
 
 		//④sql文を書く：値は ? を入れておく（どんな値でも使いまわしできるようにするため）
 		//SELECT データを抽出する
@@ -60,8 +67,11 @@ public class LoginDAO {
 
 			//ここでは2つのことをしている
 			//下に1行ずらすこと
-			//データが存在していれば戻り値を true で返す・存在しなければ falseで返す
-			if (rs.next()) {
+			//データが存在している限り表示する
+			while (rs.next()) {
+
+				//LoginDTOインスタンス化
+				LoginDTO dto = new LoginDTO();
 
 				//⑧結果の処理（select文で取得した値をDTOに格納）
 				//select文でDBから取得した情報をString型に変換してDTOクラスに格納
@@ -69,14 +79,22 @@ public class LoginDAO {
 				dto.setColor_name(rs.getString("color_name"));
 				dto.setColor_number(rs.getString("color_number"));
 
-			//falseの場合下記
-			} else {
+				loginDTOList.add(dto);
+			}
+
+			//もしloginDTOList.size() が 0以下の場合、インスタンス化して該当なしと表示する
+			if (loginDTOList.size() <= 0) {
+
+				//インスタンス化
+				LoginDTO dto = new LoginDTO();
 
 				//⑧結果の処理（select文で取得した値をDTOに格納）
 				//select文でDBから取得した情報をString型に変換してDTOクラスに格納
 				//LoginDTOクラスのsetName、setPassword（setter）を利用
 				dto.setColor_name("該当なし");
 				dto.setColor_number("該当なし");
+
+				loginDTOList.add(dto);
 			}
 
 		//処理中にSQL関連のエラーが発生した際に実行する処理
@@ -103,9 +121,8 @@ public class LoginDAO {
 
 		}
 
-		//dtoに入った値を呼び出し元であるActionクラスに渡す
-		return dto;
-
+		//dtoに入った値を呼び出し元であるアクションクラスに渡す
+		return loginDTOList;
 	}
 
 }

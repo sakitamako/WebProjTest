@@ -7,11 +7,33 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
         <title>LoginError</title>
     </head>
     <body>
-        <h1>エラーが発生しました！</h1>
+        <!-- welcome.jspファイルの送信ボタン押した次の画面がこれ、下記が表示される、エラーだった時該当なしと -->
+        <!-- strutsファイルにアクションして処理結果を表示する -->
+        <h1>エラーが発生しました</h1>
         <br>
-        <h3>ログインできません！</h3>
+        <h3>ログインできません。</h3>
+
+        <s:if test='(loginDTOList.get(0).color_name)=="該当なし"'>
+            該当しませんでした。
+        </s:if>
+        <br>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Color_Name</th>
+                    <th>Color_number</th>
+                </tr>
+                <s:iterator value="loginDTOList">
+                    <tr>
+                        <td><s:property value="color_name"/></td>
+                        <td><s:property value="color_number"/></td>
+                    </tr>
+                </s:iterator>
+            </tbody>
+        </table>
     </body>
 </html>
