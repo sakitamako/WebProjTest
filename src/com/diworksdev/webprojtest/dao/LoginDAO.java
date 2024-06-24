@@ -71,6 +71,7 @@ public class LoginDAO {
 			while (rs.next()) {
 
 				//LoginDTOインスタンス化
+				//DTOと会話するためのコード
 				LoginDTO dto = new LoginDTO();
 
 				//⑧結果の処理（select文で取得した値をDTOに格納）
@@ -79,6 +80,7 @@ public class LoginDAO {
 				dto.setColor_name(rs.getString("color_name"));
 				dto.setColor_number(rs.getString("color_number"));
 
+				//List を使った場合には、add()で要素を記憶できます
 				loginDTOList.add(dto);
 			}
 
@@ -86,6 +88,7 @@ public class LoginDAO {
 			if (loginDTOList.size() <= 0) {
 
 				//インスタンス化
+				//DTOと会話するためのコード
 				LoginDTO dto = new LoginDTO();
 
 				//⑧結果の処理（select文で取得した値をDTOに格納）
@@ -94,6 +97,7 @@ public class LoginDAO {
 				dto.setColor_name("該当なし");
 				dto.setColor_number("該当なし");
 
+				//List を使った場合には、add()で要素を記憶できます
 				loginDTOList.add(dto);
 			}
 
