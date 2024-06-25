@@ -44,7 +44,7 @@ public class LoginDAO {
 		//＊ テーブルに含まれる項目全て
 		//FROM 〇〇 〇〇という名前のテーブルからデータを選択する
 		//WHERE ＜条件＞抽出条件を指定
-		//usersに入っているデータuser_name=? password = ?に入る条件を満たしたデータがsqlに代入される
+		//colorに入っているデータcolor_name=? color_number = ?に入る条件を満たしたデータがsqlに代入される
 		String sql = "select * from color where color_name=? and color_number=?";
 
 		//try.catchはjavaの例外処理のための構文
@@ -67,7 +67,7 @@ public class LoginDAO {
 
 			//ここでは2つのことをしている
 			//下に1行ずらすこと
-			//データが存在している限り表示する
+			//データが存在している限りデータを抽出する
 			while (rs.next()) {
 
 				//LoginDTOインスタンス化
@@ -81,6 +81,7 @@ public class LoginDAO {
 				dto.setColor_number(rs.getString("color_number"));
 
 				//List を使った場合には、add()で要素を記憶できます
+				//抽出したデータを記憶
 				loginDTOList.add(dto);
 			}
 
@@ -98,6 +99,7 @@ public class LoginDAO {
 				dto.setColor_number("該当なし");
 
 				//List を使った場合には、add()で要素を記憶できます
+				//抽出したデータを記憶
 				loginDTOList.add(dto);
 			}
 

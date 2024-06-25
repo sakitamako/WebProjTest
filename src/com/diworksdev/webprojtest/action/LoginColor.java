@@ -16,7 +16,7 @@ public class LoginColor extends ActionSupport {
 	private String color_name;
 	private String color_number;
 
-	//List： 複数の要素の順番を保持する。
+	//List： 複数の要素の順番を保持する。配列という入れ物の中に入れることができる要素の数、要素の数は，ゼロを含む正の整数
 	//インデックスを利用して要素にアクセスするため、配列の代わりとして利用することができます。
 	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
 	//このクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
