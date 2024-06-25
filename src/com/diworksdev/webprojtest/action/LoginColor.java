@@ -16,7 +16,7 @@ public class LoginColor extends ActionSupport {
 	private String color_name;
 	private String color_number;
 
-	//List： 複数の要素の順番を保持する。配列という入れ物の中に入れることができる要素の数、要素の数は，ゼロを含む正の整数
+	//List： 複数の要素の順番を保持する。配列という入れ物の中に入れることができる要素の数、要素の数は，ゼロを含む正の整数、配列の中に格納された値
 	//インデックスを利用して要素にアクセスするため、配列の代わりとして利用することができます。
 	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
 	//このクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
@@ -40,7 +40,7 @@ public class LoginColor extends ActionSupport {
 		//JSPから送られてきたnameとnumberを引数として、
 		//LoginDAOクラスのselectメソッドを呼び出す
 		//その後、DAOで取得した結果をLoginDTOに代入する
-		//LoginDAOの29行目を呼び出す
+		//LoginDAOの31行目を呼び出す
 		LoginDTOList = dao.select(color_name, color_number);
 
 		//aとbが共にtrueの時に処理を実行するそうでない場合はエラー
