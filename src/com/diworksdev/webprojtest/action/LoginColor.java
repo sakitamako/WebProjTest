@@ -1,6 +1,5 @@
 package com.diworksdev.webprojtest.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.diworksdev.webprojtest.dao.LoginDAO;
@@ -20,7 +19,8 @@ public class LoginColor extends ActionSupport {
 	//インデックスを利用して要素にアクセスするため、配列の代わりとして利用することができます。
 	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
 	//このクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
-	private List<LoginDTO> LoginDTOList = new ArrayList<LoginDTO>();
+	private List<LoginDTO> LoginDTOList;
+//	private List<LoginDTO> LoginDTOList = new ArrayList<LoginDTO>();
 
 	//メソッド名は「execute」
 	//管理コマンド・メッセージをコマンド・サーバーに送信し、何らかの応答メッセージを待ちます
