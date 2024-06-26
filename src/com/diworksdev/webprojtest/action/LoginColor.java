@@ -20,7 +20,8 @@ public class LoginColor extends ActionSupport {
 	//配列の場合、宣言時に必要な個数を指定する必要がありましたが、List では後から要素数を変更出来るのが特徴です。
 	//このクラス・変数・変数名＝インスタンス化（コピーしたものを代入）
 	private List<LoginDTO> LoginDTOList;
-//	private List<LoginDTO> LoginDTOList = new ArrayList<LoginDTO>();
+//	private List<LoginDTO> LoginDTOList = new ArrayList<LoginDTO>();⇦元々これ、上記に変えることでも同じように実行できる、インスタンス化の記述が重要なわけではない
+	//private List<LoginDTO> LoginDTOList;だけでも44行目でデータを呼び出しているため！
 
 	//メソッド名は「execute」
 	//管理コマンド・メッセージをコマンド・サーバーに送信し、何らかの応答メッセージを待ちます

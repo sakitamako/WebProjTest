@@ -45,7 +45,8 @@ public class LoginDAO {
 		//FROM 〇〇 〇〇という名前のテーブルからデータを選択する
 		//WHERE ＜条件＞抽出条件を指定
 		//colorに入っているデータcolor_name=? color_number = ?に入る条件を満たしたデータがsqlに代入される
-		String sql = "select * from color where color_name=?";
+		//INSERT INTO `color`(`color_id`, `color_name`, `color_number`) VALUES ('5','red','123')⇦マンプインサートして追加
+		String sql = "select * from color where color_name=?";//⇦条件number消したらnameの条件に一致するデータを出力してくれる
 //		String sql = "select * from color where color_name=? and color_number=?";
 
 		//try.catchはjavaの例外処理のための構文
@@ -59,7 +60,7 @@ public class LoginDAO {
 
 			//⑥sql文の?に入れる値をsetする
 			ps.setString(1, color_name);
-//			ps.setString(2, color_number);
+//			ps.setString(2, color_number);これ消すことでnameの条件のみsetされる
 
 			//⑦executeQuery()/executeUpdate()で実行
 			//（select文の場合はexectuteQuery()を使う）
