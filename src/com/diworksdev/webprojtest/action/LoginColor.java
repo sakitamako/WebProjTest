@@ -38,16 +38,15 @@ public class LoginColor extends ActionSupport {
 		LoginDAO dao = new LoginDAO();
 
 		//JSPから送られてきたnameとnumberを引数として、
-		//LoginDAOクラスのselectメソッドを呼び出す
-		//その後、DAOで取得した結果をLoginDTOに代入する
-		//LoginDAOの31行目を呼び出す
+		//LoginDAOクラスのselectメソッドを呼び出す、31行目
+		//select文でデータベースからデータを引き出してLoginDTOListに代入している
 		LoginDTOList = dao.select(color_name, color_number);
 
 		//aとbが共にtrueの時に処理を実行するそうでない場合はエラー
 		//this.とはこのクラスのインスタンスのフィールド(変数)であることを表す。
 		//何かのインスタンス同士が「同じ」かを調べるメソッド=equals、イコールズ？
-		//ユーザーが入力した（color_name）と(color_number)が、DTOからもってきた値（dto.getColor_name()）と(dto.getColor_number())がともにtrueの場合SUCCESS。
-		if (this.color_name.equals(LoginDTOList.get(0).getColor_name()) && this.color_number.equals(LoginDTOList.get(0).getColor_number())){
+		//ユーザーが入力した（color_name）と(color_number)が、DTOからもってきた値（dto.getColor_name()）と(dto.getColor_number())とともにtrueの場合SUCCESS。
+		if (this.color_name.equals(LoginDTOList.get(0).getColor_name()) && this.color_number.equals(LoginDTOList.get(0).getColor_number())) {
 
 			ret = SUCCESS;
 
@@ -65,6 +64,7 @@ public class LoginColor extends ActionSupport {
 
 	//フィールド変数に対応したgetterとsetterを定義
 	//get は値を取得、set は登録
+	//この記述コメントアウトして下記のsetColor_nameだけでもエラー表示なく実行できた
 	public String getColor_name() {
 		return color_name;
 
@@ -73,6 +73,7 @@ public class LoginColor extends ActionSupport {
 	//JSPでユーザーが入力したnameとnumberの値がそれぞれ格納される
 	//次画面に値を引き渡すサイトの場合、getter必要です。後々の不具合を防ぐため.
 	//getterとsetterは両方書くようにする
+	//この記述ないとエラー出る、jspファイルからこのクラスに送られてきたcolor_nameをセットして表示しているため
 	public void setColor_name(String color_name) {
 		this.color_name = color_name;
 
@@ -88,11 +89,14 @@ public class LoginColor extends ActionSupport {
 
 	}
 
+	//上記のgetColor_nameと同じようにコメントアウトしてみたらエラーは出ないけどnameやnumberの表示が空になった
+	//サーバーから送られてきたデータが保持されているので全てのクラスのLoginDTOListに格納された値を持ってきているから必要な記述
 	public List<LoginDTO> getLoginDTOList() {
 		return LoginDTOList;
 
 	}
 
+	//login.jspファイルで表示するためにsetしなければならないため必要な記述
 	public void setLoginDTOList(List<LoginDTO> loginDTOList) {
 		LoginDTOList = loginDTOList;
 
